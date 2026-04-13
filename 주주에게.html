@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+
+<!-- ✅ 모바일 필수 -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>JUJUTOON</title>
+
+<style>
+body {
+  margin:0;
+  font-family:Arial;
+  background:#f5f5f5;
+  max-width:480px;
+  margin:auto;
+}
+
+/* 헤더 */
+header {
+  background:white;
+  padding:12px;
+  display:flex;
+  justify-content:space-between;
+  border-bottom:1px solid #ddd;
+}
+
+.logo {
+  color:#ff4da6;
+  font-weight:bold;
+}
+
+/* 메뉴 */
+.menu {
+  display:flex;
+  justify-content:space-around;
+  padding:10px;
+  background:white;
+}
+
+.menu span {
+  cursor:pointer;
+  color:gray;
+}
+
+.active {
+  color:#ff4da6;
+  font-weight:bold;
+}
+
+/* 페이지 */
+.page { display:none; }
+.page.active { display:block; }
+
+/* 요일 */
+.days {
+  display:flex;
+  justify-content:space-around;
+  background:white;
+  padding:10px;
+  font-size:14px;
+}
+
+/* 카드 */
+.container {
+  padding:10px;
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:10px;
+}
+
+.card {
+  background:white;
+  border-radius:10px;
+  overflow:hidden;
+}
+
+.card img {
+  width:100%;
+  aspect-ratio:3/4;
+  object-fit:cover;
+}
+
+.info { padding:8px; }
+
+.small {
+  font-size:12px;
+  color:gray;
+}
+
+.like {
+  cursor:pointer;
+  color:gray;
+}
+
+/* 📱 더 작은 화면 */
+@media (max-width:480px) {
+  .container {
+    grid-template-columns:repeat(1,1fr);
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">JUJUTOON</div>
+  <div>🔍 👤</div>
+</header>
+
+<!-- 메뉴 -->
+<div class="menu">
+  <span class="tab active" data-page="home">홈</span>
+  <span class="tab" data-page="series">연재</span>
+  <span class="tab" data-page="ranking">랭킹</span>
+</div>
+
+<!-- 홈 -->
+<div class="page active" id="home">
+  <div style="padding:20px;">
+    🎉대충진주생일축하글
+  </div>
+</div>
+
+<!-- 연재 -->
+<div class="page" id="series">
+
+  <div class="days">
+    <span data-day="월">월</span>
+    <span data-day="화">화</span>
+    <span data-day="수" class="active">수</span>
+    <span data-day="목">목</span>
+    <span data-day="금">금</span>
+  </div>
+
+  <div class="container">
+
+    <!-- 월 -->
+    <div class="card" data-day="월">
+      <img src="https://via.placeholder.com/300"> <!-- (닥수가수정) -->
+      <div class="info">
+        <div>웹툰1</div>
+        <div class="small">작가: 이닥수</div>
+        <div class="small">조회수: <span class="view">2005</span></div>
+        <div class="like">❤️ <span>414</span></div>
+      </div>
+    </div>
+
+    <!-- 화 -->
+    <div class="card" data-day="화">
+      <img src="https://via.placeholder.com/300"> <!-- (닥수가수정) -->
+      <div class="info">
+        <div>웹툰2</div>
+        <div class="small">작가: 룽바오</div>
+        <div class="small">조회수: <span class="view">2005</span></div>
+        <div class="like">❤️ <span>414</span></div>
+      </div>
+    </div>
+
+    <!-- 수 -->
+    <div class="card" data-day="수">
+      <img src="https://via.placeholder.com/300"> <!-- (닥수가수정) -->
+      <div class="info">
+        <div>웹툰3</div>
+        <div class="small">작가: 전씨아</div>
+        <div class="small">조회수: <span class="view">2005</span></div>
+        <div class="like">❤️ <span>414</span></div>
+      </div>
+    </div>
+
+    <!-- 목 -->
+    <div class="card" data-day="목">
+      <img src="https://via.placeholder.com/300"> <!-- (닥수가수정) -->
+      <div class="info">
+        <div>웹툰4</div>
+        <div class="small">작가: 김맹지</div>
+        <div class="small">조회수: <span class="view">2005</span></div>
+        <div class="like">❤️ <span>414</span></div>
+      </div>
+    </div>
+
+    <!-- 금 -->
+    <div class="card" data-day="금">
+      <img src="https://via.placeholder.com/300"> <!-- (닥수가수정) -->
+      <div class="info">
+        <div>웹툰5</div>
+        <div class="small">작가: 최인양</div>
+        <div class="small">조회수: <span class="view">2005</span></div>
+        <div class="like">❤️ <span>414</span></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- 랭킹 -->
+<div class="page" id="ranking">
+  <div style="padding:20px;">
+    흠여기뭐넣지?
+  </div>
+</div>
+
+<script>
+
+// 탭 전환
+const tabs = document.querySelectorAll(".tab");
+const pages = document.querySelectorAll(".page");
+
+tabs.forEach(tab => {
+  tab.addEventListener("click", () => {
+    tabs.forEach(t => t.classList.remove("active"));
+    tab.classList.add("active");
+
+    const target = tab.dataset.page;
+
+    pages.forEach(page => {
+      page.classList.remove("active");
+      if (page.id === target) page.classList.add("active");
+    });
+  });
+});
+
+// 조회수
+document.querySelectorAll(".card").forEach(card => {
+  card.addEventListener("click", () => {
+    let view = card.querySelector(".view");
+    view.innerText = parseInt(view.innerText) + 1;
+  });
+});
+
+// 좋아요
+document.querySelectorAll(".like").forEach(like => {
+  like.addEventListener("click", (e) => {
+    e.stopPropagation();
+    let count = like.querySelector("span");
+    count.innerText = parseInt(count.innerText) + 1;
+  });
+});
+
+// 요일 필터
+const days = document.querySelectorAll(".days span");
+const cards = document.querySelectorAll(".card");
+
+days.forEach(day => {
+  day.addEventListener("click", () => {
+
+    days.forEach(d => d.classList.remove("active"));
+    day.classList.add("active");
+
+    const selected = day.dataset.day;
+
+    cards.forEach(card => {
+      card.style.display =
+        card.dataset.day === selected ? "block" : "none";
+    });
+
+  });
+});
+
+// ✅ 처음 로딩 시 수요일 자동 적용
+window.addEventListener("DOMContentLoaded", () => {
+  document.querySelector(".days .active").click();
+});
+
+</script>
+
+</body>
+</html>
